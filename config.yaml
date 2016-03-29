@@ -1,0 +1,4 @@
+---
+REDIS: redis://127.0.0.1:6379/1
+POLL_INTERVAL: '5'
+MANDRILL_SENDEMAIL_SCIPT: /home/tonercity/git/aws_front/shell/MandrillProcessor.php

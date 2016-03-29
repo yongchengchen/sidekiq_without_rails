@@ -10,7 +10,7 @@ Your code should be managed like below:
 
 
 run sidekiq:
-sidekiq -r starter.rb
+sidekiq -r ./starter.rb
 
 triger a job:
 ruby job.rb
