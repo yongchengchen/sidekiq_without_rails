@@ -1,0 +1,4 @@
+---
+SendEmailWorker:
+  freq: '5'
+  require: workers/sendemail.rb

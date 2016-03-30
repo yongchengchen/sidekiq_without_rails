@@ -2,15 +2,15 @@ require 'sidekiq'
 require 'sidekiq/api'
 require "yaml"
 
-workers_path = File.dirname(__FILE__)
+$app_path = File.dirname(__FILE__)
 #require "#{workers_path}/config.rb"
 
-$app_config = YAML.load_file("config.yaml")
-
+$app_config = YAML.load_file("configs/config.yaml")
 #config redis
 Sidekiq.configure_server do |config|
   #check every 15sec
-  Sidekiq::Scheduled.const_set("POLL_INTERVAL", $app_config['POLL_INTERVAL'].to_f)
+  #Sidekiq::Scheduled.const_set("POLL_INTERVAL", $app_config['POLL_INTERVAL'].to_f)
+  config.poll_interval = $app_config['POLL_INTERVAL'].to_f
   config.redis = { url: $app_config['REDIS'] }
 end
 
@@ -25,7 +25,8 @@ queue.each do |job|
   end
 end
 
-workers =  Dir["#{workers_path}/workers/*.rb"]
+workers =  Dir["#{$app_path}/workers/*.rb"]
 workers.each {|worker| require "#{worker}"}
 
+$crontabs = {}
 CronTabWorker.initTab();

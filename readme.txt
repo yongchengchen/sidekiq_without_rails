@@ -15,4 +15,7 @@ sidekiq -r ./starter.rb
 triger a job:
 ruby job.rb
 
+
+for crontab worker, you should implement a member exec to do the real perform action
+
 Then you will see job running
